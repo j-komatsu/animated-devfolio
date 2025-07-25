@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D ロゴ回転アニメーション - Animated DevFolio</title>
+    <link rel="stylesheet" href="../../shared/common.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+    <a href="../../index.html" class="nav-back">一覧に戻る</a>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="title fade-in">3D ロゴ回転アニメーション</h1>
+            <p class="description fade-in fade-in-delay-1">
+                Three.jsを使用したインタラクティブな3Dロゴアニメーション。<br>
+                企業ロゴが美しく回転しながら浮かび上がる印象的な演出を実現します。
+            </p>
+            
+            <div class="tech-stack fade-in fade-in-delay-2">
+                <span class="tech-tag">Three.js</span>
+                <span class="tech-tag">WebGL</span>
+                <span class="tech-tag">3D Animation</span>
+                <span class="tech-tag">JavaScript</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- 3Dアニメーション表示エリア -->
+            <div class="animation-container fade-in fade-in-delay-3">
+                <canvas id="three-canvas"></canvas>
+                
+                <!-- コントロールパネル -->
+                <div class="controls">
+                    <h3>アニメーションコントロール</h3>
+                    <div class="control-group">
+                        <button id="playBtn" class="btn btn-primary">再生/停止</button>
+                        <button id="resetBtn" class="btn btn-secondary">リセット</button>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="speedSlider">回転速度:</label>
+                        <input type="range" id="speedSlider" min="0.5" max="3" step="0.1" value="1">
+                        <span id="speedValue">1.0x</span>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="colorSelect">カラーテーマ:</label>
+                        <select id="colorSelect">
+                            <option value="blue">ブルー</option>
+                            <option value="red">レッド</option>
+                            <option value="green">グリーン</option>
+                            <option value="purple">パープル</option>
+                            <option value="rainbow">レインボー</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 説明セクション -->
+            <section class="info-section fade-in fade-in-delay-4">
+                <h2>技術仕様</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>🎯 アニメーション特徴</h3>
+                        <ul>
+                            <li>スムーズな3D回転効果</li>
+                            <li>リアルタイム光源処理</li>
+                            <li>インタラクティブなコントロール</li>
+                            <li>レスポンシブデザイン対応</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>⚙️ 使用技術</h3>
+                        <ul>
+                            <li><strong>Three.js:</strong> 3Dグラフィックス描画</li>
+                            <li><strong>WebGL:</strong> GPU加速レンダリング</li>
+                            <li><strong>GSAP:</strong> UIアニメーション</li>
+                            <li><strong>Canvas API:</strong> 描画コンテキスト</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>🚀 パフォーマンス</h3>
+                        <ul>
+                            <li>60FPS での滑らかな描画</li>
+                            <li>GPU最適化されたシェーダー</li>
+                            <li>効率的なメモリ管理</li>
+                            <li>クロスブラウザ対応</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- コードスニペット -->
+            <section class="code-section fade-in fade-in-delay-5">
+                <h2>実装例</h2>
+                <div class="code-container">
+                    <pre><code class="language-javascript">// Three.js シーンの初期化
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+
+// 3Dロゴの作成
+const geometry = new THREE.BoxGeometry(2, 2, 2);
+const material = new THREE.MeshPhongMaterial({ 
+    color: 0x4a90e2,
+    shininess: 100 
+});
+const logo = new THREE.Mesh(geometry, material);
+
+// アニメーションループ
+function animate() {
+    requestAnimationFrame(animate);
+    logo.rotation.x += 0.01;
+    logo.rotation.y += 0.01;
+    renderer.render(scene, camera);
+}</code></pre>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1074 @@
+/* Animation 5: Login UI Animation Styles */
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    min-height: 100vh;
+    color: white;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* 動的背景パーティクル */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="25" cy="25" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="50" cy="10" r="1.5" fill="rgba(255,255,255,0.08)"/></svg>');
+    background-size: 200px 200px;
+    animation: particleFloat 20s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes particleFloat {
+    0% { transform: translateY(0px) translateX(0px); }
+    25% { transform: translateY(-50px) translateX(25px); }
+    50% { transform: translateY(-100px) translateX(-25px); }
+    75% { transform: translateY(-50px) translateX(25px); }
+    100% { transform: translateY(0px) translateX(0px); }
+}
+
+.header {
+    text-align: center;
+    padding: 2rem 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f093fb, #feca57);
+    background-size: 500% 500%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: uiGradient 6s ease-in-out infinite;
+}
+
+@keyframes uiGradient {
+    0%, 100% { background-position: 0% 50%; }
+    20% { background-position: 100% 0%; }
+    40% { background-position: 100% 100%; }
+    60% { background-position: 0% 100%; }
+    80% { background-position: 0% 0%; }
+}
+
+.description {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.tech-stack {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 3rem;
+}
+
+.tech-tag {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.tech-tag:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+.main-content {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.demo-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.demo-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.demo-header h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.demo-header p {
+    opacity: 0.8;
+    font-size: 1rem;
+}
+
+/* タブナビゲーション */
+.demo-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.tab-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.tab-btn.active {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    border-color: transparent;
+    box-shadow: 0 5px 15px rgba(78, 205, 196, 0.3);
+}
+
+/* ログインデモコンテナ */
+.login-demo {
+    position: relative;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+}
+
+.login-container.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ログインカード共通スタイル */
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* モダンテーマ */
+.modern-theme .login-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modern-theme .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.modern-theme .logo-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.modern-theme .logo h3 {
+    color: #fff;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.welcome-text {
+    text-align: center;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    font-size: 1rem;
+}
+
+/* フォームスタイル */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    padding-right: 3rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-wrapper input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.input-wrapper input:focus {
+    outline: none;
+    border-color: #4ecdc4;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+}
+
+.input-icon {
+    position: absolute;
+    right: 1rem;
+    font-size: 1rem;
+    opacity: 0.7;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.toggle-password:hover {
+    opacity: 1;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+.forgot-password {
+    color: #4ecdc4;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+    color: #44a08d;
+}
+
+/* ログインボタン */
+.login-btn {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(78, 205, 196, 0.4);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+.btn-text {
+    display: inline-block;
+    transition: opacity 0.3s ease;
+}
+
+.btn-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.login-btn.loading .btn-text {
+    opacity: 0;
+}
+
+.login-btn.loading .btn-loading {
+    opacity: 1;
+}
+
+.loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 区切り線 */
+.divider {
+    text-align: center;
+    position: relative;
+    margin: 1.5rem 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 1;
+}
+
+.divider span {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* ソーシャルログイン */
+.social-login {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.social-btn {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.social-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.social-btn.google:hover {
+    border-color: #db4437;
+}
+
+.social-btn.github:hover {
+    border-color: #333;
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.signup-link a {
+    color: #4ecdc4;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signup-link a:hover {
+    color: #44a08d;
+}
+
+/* グラスモーフィズムテーマ */
+.glass-theme .login-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+}
+
+.glass-theme .glass-icon {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    animation: glassFloat 4s ease-in-out infinite;
+}
+
+@keyframes glassFloat {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-5px) scale(1.05); }
+}
+
+.glass-input input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+}
+
+.glass-input input:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.glass-btn {
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-btn:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* ミニマルテーマ */
+.minimal-theme .login-card {
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.minimal-theme .login-header h3 {
+    color: #333;
+    font-weight: 300;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.minimal-input {
+    width: 100%;
+    padding: 1rem 0;
+    border: none;
+    border-bottom: 2px solid #e0e0e0;
+    background: transparent;
+    color: #333;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.minimal-input::placeholder {
+    color: #999;
+}
+
+.minimal-input:focus {
+    outline: none;
+    border-bottom-color: #4ecdc4;
+}
+
+.minimal-btn {
+    background: #333 !important;
+    color: white;
+    border-radius: 0;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.minimal-btn:hover {
+    background: #555 !important;
+}
+
+/* ダークテーマ */
+.dark-theme .login-card {
+    background: linear-gradient(135deg, #1e1e1e, #2d2d2d);
+    border: 1px solid #444;
+}
+
+.dark-theme .dark-icon {
+    background: linear-gradient(45deg, #6366f1, #8b5cf6);
+    animation: darkPulse 3s ease-in-out infinite;
+}
+
+@keyframes darkPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+    50% { box-shadow: 0 0 20px 10px rgba(99, 102, 241, 0.1); }
+}
+
+.dark-input input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #444;
+    color: #fff;
+}
+
+.dark-input input:focus {
+    border-color: #6366f1;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+.dark-btn {
+    background: linear-gradient(45deg, #6366f1, #8b5cf6) !important;
+}
+
+.dark-btn:hover {
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4) !important;
+}
+
+/* アニメーション制御パネル */
+.animation-controls {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    margin-top: 2rem;
+}
+
+.animation-controls h3 {
+    margin-bottom: 1rem;
+    color: #4ecdc4;
+    font-size: 1.2rem;
+}
+
+.control-group {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.control-group label {
+    font-weight: 600;
+    min-width: 80px;
+    color: #fff;
+}
+
+.control-group input[type="range"] {
+    flex: 1;
+    min-width: 120px;
+    accent-color: #4ecdc4;
+}
+
+.control-group select {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 0.5rem;
+    color: white;
+    font-size: 0.9rem;
+    min-width: 120px;
+}
+
+.control-group select option {
+    background: #764ba2;
+    color: white;
+}
+
+#speedDisplay {
+    font-weight: bold;
+    color: #4ecdc4;
+    min-width: 40px;
+}
+
+/* パターン紹介セクション */
+.patterns-section {
+    margin-bottom: 3rem;
+}
+
+.patterns-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.patterns-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.pattern-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.pattern-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border-color: rgba(78, 205, 196, 0.5);
+}
+
+.pattern-preview {
+    width: 100%;
+    height: 120px;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.modern-preview {
+    background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+    position: relative;
+    overflow: hidden;
+}
+
+.modern-preview::after {
+    content: '🚀';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+}
+
+.glass-preview {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.glass-preview::after {
+    content: '✨';
+}
+
+.minimal-preview {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-size: 2rem;
+}
+
+.minimal-preview::after {
+    content: '⚡';
+}
+
+.dark-preview {
+    background: linear-gradient(135deg, #1e1e1e, #2d2d2d);
+    border: 1px solid #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.dark-preview::after {
+    content: '🌙';
+}
+
+.pattern-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #4ecdc4;
+}
+
+.pattern-card p {
+    margin-bottom: 1rem;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.pattern-features {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.pattern-features li {
+    padding: 0.3rem 0;
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.pattern-features li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #4ecdc4;
+    font-weight: bold;
+}
+
+/* 技術仕様・コード例は共通スタイルを使用 */
+.info-section {
+    margin-bottom: 3rem;
+}
+
+.info-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border-color: rgba(78, 205, 196, 0.5);
+}
+
+.info-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #4ecdc4;
+}
+
+.info-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.info-card li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative; 
+    padding-left: 1.5rem;
+}
+
+.info-card li:last-child {
+    border-bottom: none;
+}
+
+.info-card li::before {
+    content: "🎨";
+    position: absolute;
+    left: 0;
+    font-size: 0.9rem;
+}
+
+.code-section {
+    margin-bottom: 3rem;
+}
+
+.code-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.code-container {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow-x: auto;
+}
+
+.code-container pre {
+    margin: 0;
+    color: #e6e6e6;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* ボタンスタイル */
+.btn {
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(78, 205, 196, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+    
+    .description {
+        font-size: 1rem;
+    }
+    
+    .demo-tabs {
+        gap: 0.5rem;
+    }
+    
+    .tab-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .login-card {
+        padding: 2rem 1.5rem;
+        margin: 1rem;
+    }
+    
+    .patterns-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .pattern-preview {
+        height: 100px;
+    }
+    
+    .control-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .control-group input[type="range"],
+    .control-group select {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .demo-container {
+        padding: 1rem;
+    }
+    
+    .login-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .demo-tabs {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        width: 100%;
+    }
+    
+    .social-login {
+        gap: 0.5rem;
+    }
+    
+    .animation-controls {
+        padding: 1rem;
+    }
+}
+
+/* アニメーション */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-delay-1 { animation-delay: 0.2s; }
+.fade-in-delay-2 { animation-delay: 0.4s; }
+.fade-in-delay-3 { animation-delay: 0.6s; }
+.fade-in-delay-4 { animation-delay: 0.8s; }
+.fade-in-delay-5 { animation-delay: 1.0s; }
+.fade-in-delay-6 { animation-delay: 1.2s; }
+
+/* エラー状態 */
+.input-error {
+    border-color: #ff6b6b !important;
+    background: rgba(255, 107, 107, 0.1) !important;
+}
+
+.error-message {
+    color: #ff6b6b;
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.error-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 成功状態 */
+.input-success {
+    border-color: #4ecdc4 !important;
+    background: rgba(78, 205, 196, 0.1) !important;
+}
+
+/* パフォーマンス最適化 */
+.login-card {
+    will-change: transform;
+}
+
+.btn {
+    will-change: transform;
+}
+
+/* アクセシビリティ */
+@media (prefers-reduced-motion: reduce) {
+    .title {
+        animation: none;
+    }
+    
+    .fade-in {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+    
+    .logo-icon {
+        animation: none;
+    }
+    
+    .loading-spinner {
+        animation: none;
+    }
+    
+    body::before {
+        animation: none;
+    }
+}
+
+/* 高コントラストモード */
+@media (prefers-contrast: high) {
+    .login-card {
+        border: 2px solid #fff;
+        background: rgba(0, 0, 0, 0.9) !important;
+    }
+    
+    .input-wrapper input {
+        border: 2px solid #fff;
+    }
+    
+    .tab-btn {
+        border: 2px solid #fff;
+    }
+}

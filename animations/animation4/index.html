@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>インタラクティブ3D地球儀 - Animated DevFolio</title>
+    <link rel="stylesheet" href="../../shared/common.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="../../index.html" class="nav-back">一覧に戻る</a>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="title fade-in">インタラクティブ3D地球儀</h1>
+            <p class="description fade-in fade-in-delay-1">
+                Canvas 2Dを使用したインタラクティブな地球儀アニメーション。<br>
+                グローバルなビジネス展開や地理的データの可視化に最適な演出です。
+            </p>
+            
+            <div class="tech-stack fade-in fade-in-delay-2">
+                <span class="tech-tag">Canvas 2D</span>
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">Interactive</span>
+                <span class="tech-tag">Animation</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- 地球儀表示エリア -->
+            <div class="animation-container fade-in fade-in-delay-3">
+                <div class="globe-container">
+                    <canvas id="globe-canvas" width="800" height="600"></canvas>
+                    
+                    <!-- 地球儀上の情報パネル -->
+                    <div class="info-panel" id="infoPanel">
+                        <h3 id="locationName">地球</h3>
+                        <div class="info-details">
+                            <div class="info-item">
+                                <span class="label">人口:</span>
+                                <span class="value" id="population">78億人</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">面積:</span>
+                                <span class="value" id="area">510,100,000 km²</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">時間帯:</span>
+                                <span class="value" id="timezone">UTC</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- コントロールパネル -->
+                <div class="controls">
+                    <h3>地球儀コントロール</h3>
+                    <div class="control-group">
+                        <button id="autoRotateBtn" class="btn btn-primary">自動回転 ON</button>
+                        <button id="resetViewBtn" class="btn btn-secondary">視点リセット</button>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="rotationSpeed">回転速度:</label>
+                        <input type="range" id="rotationSpeed" min="0" max="5" step="0.1" value="1">
+                        <span id="speedDisplay">1.0</span>
+                    </div>
+                </div>
+
+                <!-- 都市選択パネル -->
+                <div class="city-panel">
+                    <h3>主要都市</h3>
+                    <div class="city-grid">
+                        <div class="city-card" data-city="tokyo">
+                            <div class="city-flag">🇯🇵</div>
+                            <div class="city-info">
+                                <div class="city-name">東京</div>
+                                <div class="city-coords">35.68°N, 139.65°E</div>
+                            </div>
+                        </div>
+                        
+                        <div class="city-card" data-city="newyork">
+                            <div class="city-flag">🇺🇸</div>
+                            <div class="city-info">
+                                <div class="city-name">ニューヨーク</div>
+                                <div class="city-coords">40.71°N, 74.01°W</div>
+                            </div>
+                        </div>
+                        
+                        <div class="city-card" data-city="london">
+                            <div class="city-flag">🇬🇧</div>
+                            <div class="city-info">
+                                <div class="city-name">ロンドン</div>
+                                <div class="city-coords">51.51°N, 0.13°W</div>
+                            </div>
+                        </div>
+                        
+                        <div class="city-card" data-city="singapore">
+                            <div class="city-flag">🇸🇬</div>
+                            <div class="city-info">
+                                <div class="city-name">シンガポール</div>
+                                <div class="city-coords">1.35°N, 103.82°E</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- グローバル統計 -->
+            <section class="stats-section fade-in fade-in-delay-4">
+                <h2>グローバル統計</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-icon">🌍</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="countriesCount">195</div>
+                            <div class="stat-label">国・地域</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-icon">🏙️</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="citiesCount">4,416</div>
+                            <div class="stat-label">主要都市</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-icon">🕒</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="timezonesCount">24</div>
+                            <div class="stat-label">タイムゾーン</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-icon">🌐</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="languagesCount">7,139</div>
+                            <div class="stat-label">言語</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 技術仕様 -->
+            <section class="info-section fade-in fade-in-delay-5">
+                <h2>技術仕様</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>🌐 Canvas レンダリング</h3>
+                        <ul>
+                            <li>Canvas 2Dによる高性能描画</li>
+                            <li>リアルタイム回転アニメーション</li>
+                            <li>インタラクティブ操作</li>
+                            <li>レスポンシブ対応</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>⚙️ インタラクション</h3>
+                        <ul>
+                            <li><strong>回転:</strong> 自動・手動制御</li>
+                            <li><strong>都市選択:</strong> クリック操作</li>
+                            <li><strong>情報表示:</strong> 動的更新</li>
+                            <li><strong>速度調整:</strong> リアルタイム</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>🎯 ビジネス活用</h3>
+                        <ul>
+                            <li>グローバル拠点の可視化</li>
+                            <li>地理的データの表現</li>
+                            <li>国際的なプレゼンテーション</li>
+                            <li>地域別分析の表示</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 実装コード例 -->
+            <section class="code-section fade-in fade-in-delay-6">
+                <h2>実装例</h2>
+                <div class="code-container">
+                    <pre><code class="language-javascript">// Canvas 2D を使用した地球儀の作成
+class Globe2D {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+        this.centerX = canvas.width / 2;
+        this.centerY = canvas.height / 2;
+        this.radius = Math.min(canvas.width, canvas.height) / 4;
+        this.rotation = 0;
+        this.animate();
+    }
+
+    drawEarth() {
+        // 地球本体
+        const gradient = this.ctx.createRadialGradient(
+            this.centerX - this.radius * 0.3, 
+            this.centerY - this.radius * 0.3, 0,
+            this.centerX, this.centerY, this.radius
+        );
+        gradient.addColorStop(0, '#4a90e2');
+        gradient.addColorStop(1, '#08306b');
+        
+        this.ctx.beginPath();
+        this.ctx.arc(this.centerX, this.centerY, this.radius, 0, Math.PI * 2);
+        this.ctx.fillStyle = gradient;
+        this.ctx.fill();
+    }
+
+    animate() {
+        this.rotation += 0.005;
+        this.draw();
+        requestAnimationFrame(() => this.animate());
+    }
+}</code></pre>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

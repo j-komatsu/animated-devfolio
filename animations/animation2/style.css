@@ -1,0 +1,582 @@
+/* Animation 2: Code Typing Animation Styles */
+
+body {
+    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+    min-height: 100vh;
+    color: white;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Courier New', monospace;
+}
+
+.header {
+    text-align: center;
+    padding: 2rem 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #00ff88, #00aaff, #aa00ff);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: codeGradient 4s ease-in-out infinite;
+}
+
+@keyframes codeGradient {
+    0%, 100% { background-position: 0% 50%; }
+    33% { background-position: 50% 0%; }
+    66% { background-position: 100% 50%; }
+}
+
+.description {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    font-family: 'Arial', sans-serif;
+}
+
+.tech-stack {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 3rem;
+}
+
+.tech-tag {
+    background: rgba(0, 255, 136, 0.1);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    color: #00ff88;
+}
+
+.tech-tag:hover {
+    background: rgba(0, 255, 136, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+}
+
+.main-content {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.animation-container {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.code-editor {
+    background: #1e1e1e;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    margin-bottom: 2rem;
+    border: 1px solid #333;
+}
+
+.editor-header {
+    background: linear-gradient(90deg, #2d2d2d, #1e1e1e);
+    padding: 0.8rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #333;
+}
+
+.editor-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.control:hover {
+    opacity: 0.8;
+}
+
+.control.close {
+    background: #ff5f57;
+}
+
+.control.minimize {
+    background: #ffbd2e;
+}
+
+.control.maximize {
+    background: #28ca42;
+}
+
+.editor-title {
+    font-weight: bold;
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.editor-language {
+    color: #888;
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.editor-content {
+    display: flex;
+    min-height: 400px;
+    position: relative;
+}
+
+.line-numbers {
+    background: #1a1a1a;
+    color: #666;
+    padding: 1rem 0.8rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    border-right: 1px solid #333;
+    user-select: none;
+    text-align: right;
+    min-width: 50px;
+}
+
+.code-area {
+    flex: 1;
+    position: relative;
+    padding: 1rem;
+    overflow: hidden;
+}
+
+#codeDisplay {
+    background: transparent;
+    color: #e6e6e6;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.cursor {
+    display: inline-block;
+    background: #00ff88;
+    color: transparent;
+    animation: blink 1s infinite;
+    font-weight: bold;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.controls {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.controls h3 {
+    margin-bottom: 1rem;
+    color: #00ff88;
+    font-size: 1.2rem;
+}
+
+.control-group {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.control-group label {
+    font-weight: 600;
+    min-width: 120px;
+    color: #ccc;
+}
+
+.control-group input[type="range"] {
+    flex: 1;
+    min-width: 150px;
+    accent-color: #00ff88;
+}
+
+.control-group select {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 0.5rem;
+    color: white;
+    font-size: 0.9rem;
+    min-width: 150px;
+}
+
+.control-group select option {
+    background: #1a1a2e;
+    color: white;
+}
+
+.control-group input[type="checkbox"] {
+    accent-color: #00ff88;
+    margin-right: 0.5rem;
+}
+
+#speedValue {
+    font-weight: bold;
+    color: #00ff88;
+    min-width: 50px;
+}
+
+.info-section {
+    margin-bottom: 3rem;
+}
+
+.info-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 255, 136, 0.1);
+    border-color: rgba(0, 255, 136, 0.3);
+}
+
+.info-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #00ff88;
+}
+
+.info-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.info-card li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.info-card li:last-child {
+    border-bottom: none;
+}
+
+.info-card li::before {
+    content: "▶";
+    position: absolute;
+    left: 0;
+    color: #00ff88;
+    font-size: 0.8rem;
+}
+
+.samples-section {
+    margin-bottom: 3rem;
+}
+
+.samples-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.samples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.sample-card {
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 170, 255, 0.1));
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 255, 136, 0.2);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.sample-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 255, 136, 0.2);
+}
+
+.sample-card h4 {
+    color: #00ff88;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.sample-card p {
+    color: #ccc;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.code-section {
+    margin-bottom: 3rem;
+}
+
+.code-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.code-container {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow-x: auto;
+}
+
+.code-container pre {
+    margin: 0;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #e6e6e6;
+}
+
+/* Prism.js カスタムスタイル */
+.token.comment {
+    color: #6a9955;
+}
+
+.token.string {
+    color: #ce9178;
+}
+
+.token.number {
+    color: #b5cea8;
+}
+
+.token.keyword {
+    color: #569cd6;
+}
+
+.token.function {
+    color: #dcdcaa;
+}
+
+.token.class-name {
+    color: #4ec9b0;
+}
+
+.token.operator {
+    color: #d4d4d4;
+}
+
+/* ボタンスタイル */
+.btn {
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #00ff88, #00aaff);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 255, 136, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+    
+    .description {
+        font-size: 1rem;
+    }
+    
+    .animation-container {
+        padding: 1rem;
+    }
+    
+    .editor-content {
+        min-height: 300px;
+    }
+    
+    .editor-header {
+        padding: 0.5rem;
+    }
+    
+    .editor-title {
+        font-size: 0.8rem;
+    }
+    
+    .code-area {
+        padding: 0.5rem;
+    }
+    
+    #codeDisplay {
+        font-size: 0.8rem;
+    }
+    
+    .info-grid,
+    .samples-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .control-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .control-group input[type="range"],
+    .control-group select {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.5rem;
+    }
+    
+    .animation-container {
+        padding: 0.5rem;
+    }
+    
+    .editor-content {
+        min-height: 250px;
+    }
+    
+    .line-numbers {
+        padding: 0.5rem;
+        min-width: 30px;
+    }
+    
+    .controls {
+        padding: 1rem;
+    }
+}
+
+/* アニメーション */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-delay-1 { animation-delay: 0.2s; }
+.fade-in-delay-2 { animation-delay: 0.4s; }
+.fade-in-delay-3 { animation-delay: 0.6s; }
+.fade-in-delay-4 { animation-delay: 0.8s; }
+.fade-in-delay-5 { animation-delay: 1.0s; }
+.fade-in-delay-6 { animation-delay: 1.2s; }
+
+/* タイピング効果の強化 */
+.typing-line {
+    position: relative;
+}
+
+.typing-line::after {
+    content: '';
+    position: absolute;
+    right: -2px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #00ff88;
+    animation: blink 1s infinite;
+}
+
+/* カーソル位置の調整 */
+.cursor-line {
+    background-color: rgba(0, 255, 136, 0.1);
+    position: relative;
+}
+
+/* パフォーマンス最適化 */
+.code-area,
+.cursor {
+    will-change: transform;
+}
+
+/* アクセシビリティ */
+@media (prefers-reduced-motion: reduce) {
+    .title {
+        animation: none;
+    }
+    
+    .cursor {
+        animation: none;
+        opacity: 1;
+    }
+    
+    .fade-in {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+}

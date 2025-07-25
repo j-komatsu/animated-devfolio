@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>売上チャート成長アニメーション - Animated DevFolio</title>
+    <link rel="stylesheet" href="../../shared/common.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- Chart.js with fallback -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <script>
+        // Chart.js fallback
+        if (typeof Chart === 'undefined') {
+            document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"><\/script>');
+        }
+    </script>
+    
+    <!-- GSAP with fallback -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        // GSAP fallback
+        if (typeof gsap === 'undefined') {
+            document.write('<script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"><\/script>');
+        }
+    </script>
+</head>
+<body>
+    <a href="../../index.html" class="nav-back">一覧に戻る</a>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="title fade-in">売上チャート成長アニメーション</h1>
+            <p class="description fade-in fade-in-delay-1">
+                Chart.jsとGSAPを使用したビジネスデータの動的可視化。<br>
+                売上データが段階的に成長していく様子をアニメーションで表現します。
+            </p>
+            
+            <div class="tech-stack fade-in fade-in-delay-2">
+                <span class="tech-tag">Chart.js</span>
+                <span class="tech-tag">GSAP</span>
+                <span class="tech-tag">Canvas</span>
+                <span class="tech-tag">Data Visualization</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- チャートアニメーション表示エリア -->
+            <div class="animation-container fade-in fade-in-delay-3">
+                <div class="dashboard-header">
+                    <h2>売上ダッシュボード</h2>
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <div class="stat-value" id="totalSales">¥0</div>
+                            <div class="stat-label">総売上</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="growth">+0%</div>
+                            <div class="stat-label">成長率</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="customers">0</div>
+                            <div class="stat-label">顧客数</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <!-- メインの売上チャート -->
+                    <div class="chart-container main-chart">
+                        <h3>月別売上推移</h3>
+                        <canvas id="salesChart"></canvas>
+                    </div>
+
+                    <!-- カテゴリ別円グラフ -->
+                    <div class="chart-container">
+                        <h3>カテゴリ別売上</h3>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+
+                    <!-- 地域別棒グラフ -->
+                    <div class="chart-container">
+                        <h3>地域別売上</h3>
+                        <canvas id="regionChart"></canvas>
+                    </div>
+
+                    <!-- トレンド分析 -->
+                    <div class="chart-container">
+                        <h3>売上トレンド</h3>
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- コントロールパネル -->
+                <div class="controls">
+                    <h3>アニメーションコントロール</h3>
+                    <div class="control-group">
+                        <button id="startBtn" class="btn btn-primary">開始</button>
+                        <button id="pauseBtn" class="btn btn-secondary">一時停止</button>
+                        <button id="resetBtn" class="btn btn-secondary">リセット</button>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="speedSlider">アニメーション速度:</label>
+                        <input type="range" id="speedSlider" min="0.5" max="3" step="0.1" value="1">
+                        <span id="speedValue">1.0x</span>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="datasetSelect">データセット:</label>
+                        <select id="datasetSelect">
+                            <option value="tech-company">IT企業</option>
+                            <option value="retail">小売業</option>
+                            <option value="startup">スタートアップ</option>
+                            <option value="enterprise">大企業</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="themeSelect">テーマ:</label>
+                        <select id="themeSelect">
+                            <option value="default">デフォルト</option>
+                            <option value="dark">ダーク</option>
+                            <option value="colorful">カラフル</option>
+                            <option value="minimal">ミニマル</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI指標 -->
+            <section class="kpi-section fade-in fade-in-delay-4">
+                <h2>主要業績指標 (KPI)</h2>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon">📈</div>
+                        <div class="kpi-content">
+                            <div class="kpi-value" id="revenueGrowth">0%</div>
+                            <div class="kpi-label">売上成長率</div>
+                        </div>
+                    </div>
+                    
+                    <div class="kpi-card">
+                        <div class="kpi-icon">👥</div>
+                        <div class="kpi-content">
+                            <div class="kpi-value" id="customerAcquisition">0</div>
+                            <div class="kpi-label">新規顧客獲得</div>
+                        </div>
+                    </div>
+                    
+                    <div class="kpi-card">
+                        <div class="kpi-icon">💰</div>
+                        <div class="kpi-content">
+                            <div class="kpi-value" id="arpu">¥0</div>
+                            <div class="kpi-label">顧客単価</div>
+                        </div>
+                    </div>
+                    
+                    <div class="kpi-card">
+                        <div class="kpi-icon">⭐</div>
+                        <div class="kpi-content">
+                            <div class="kpi-value" id="satisfaction">0%</div>
+                            <div class="kpi-label">顧客満足度</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 技術仕様 -->
+            <section class="info-section fade-in fade-in-delay-5">
+                <h2>技術仕様</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>📊 データ可視化</h3>
+                        <ul>
+                            <li>動的チャート生成</li>
+                            <li>リアルタイムデータ更新</li>
+                            <li>インタラクティブな操作</li>
+                            <li>レスポンシブレイアウト</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>⚙️ 使用技術</h3>
+                        <ul>
+                            <li><strong>Chart.js:</strong> チャート描画エンジン</li>
+                            <li><strong>GSAP:</strong> アニメーション制御</li>
+                            <li><strong>Canvas API:</strong> 高性能描画</li>
+                            <li><strong>CSS Grid:</strong> レスポンシブ配置</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>🎯 ビジネス価値</h3>
+                        <ul>
+                            <li>データドリブンな意思決定</li>
+                            <li>視覚的なインパクト</li>
+                            <li>ステークホルダー向け提案</li>
+                            <li>パフォーマンス追跡</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 実装コード例 -->
+            <section class="code-section fade-in fade-in-delay-6">
+                <h2>実装例</h2>
+                <div class="code-container">
+                    <pre><code class="language-javascript">// Chart.js を使用した動的チャート作成
+class AnimatedChart {
+    constructor(canvas, config) {
+        this.canvas = canvas;
+        this.chart = new Chart(canvas, config);
+        this.animationSpeed = 1;
+    }
+
+    animateData(newData, duration = 1000) {
+        const chart = this.chart;
+        const originalData = [...chart.data.datasets[0].data];
+        
+        gsap.to({}, {
+            duration: duration / 1000 * this.animationSpeed,
+            ease: "power2.out",
+            onUpdate: function() {
+                const progress = this.progress();
+                
+                chart.data.datasets[0].data = originalData.map((original, index) => {
+                    const target = newData[index];
+                    return original + (target - original) * progress;
+                });
+                
+                chart.update('none');
+            },
+            onComplete: () => {
+                chart.data.datasets[0].data = newData;
+                chart.update();
+            }
+        });
+    }
+}</code></pre>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

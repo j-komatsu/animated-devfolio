@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン画面UIアニメーション - Animated DevFolio</title>
+    <link rel="stylesheet" href="../../shared/common.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+    <a href="../../index.html" class="nav-back">一覧に戻る</a>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="title fade-in">ログイン画面UIアニメーション</h1>
+            <p class="description fade-in fade-in-delay-1">
+                GSAPを使用したモダンなログインUIアニメーション。<br>
+                フォーム要素がふわっと表示される美しい演出を実現します。
+            </p>
+            
+            <div class="tech-stack fade-in fade-in-delay-2">
+                <span class="tech-tag">GSAP</span>
+                <span class="tech-tag">CSS Animation</span>
+                <span class="tech-tag">UI/UX</span>
+                <span class="tech-tag">Form Design</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- ログイン画面デモエリア -->
+            <div class="demo-container fade-in fade-in-delay-3">
+                <div class="demo-header">
+                    <h2>ログイン画面デモ</h2>
+                    <p>以下のデザインパターンからお選びいただけます</p>
+                </div>
+
+                <!-- デモ選択タブ -->
+                <div class="demo-tabs">
+                    <button class="tab-btn active" data-demo="modern">モダン</button>
+                    <button class="tab-btn" data-demo="glassmorphism">グラスモーフィズム</button>
+                    <button class="tab-btn" data-demo="minimal">ミニマル</button>
+                    <button class="tab-btn" data-demo="dark">ダーク</button>
+                </div>
+
+                <!-- ログイン画面コンテナ -->
+                <div class="login-demo" id="loginDemo">
+                    <!-- モダンデザイン -->
+                    <div class="login-container modern-theme active" id="modernDemo">
+                        <div class="login-card">
+                            <div class="login-header">
+                                <div class="logo">
+                                    <div class="logo-icon">🚀</div>
+                                    <h3>TechCorp</h3>
+                                </div>
+                                <p class="welcome-text">アカウントにログイン</p>
+                            </div>
+                            
+                            <form class="login-form" id="modernForm">
+                                <div class="form-group">
+                                    <label for="email1">メールアドレス</label>
+                                    <div class="input-wrapper">
+                                        <input type="email" id="email1" placeholder="your@email.com" required>
+                                        <span class="input-icon">📧</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="password1">パスワード</label>
+                                    <div class="input-wrapper">
+                                        <input type="password" id="password1" placeholder="••••••••" required>
+                                        <span class="input-icon">🔒</span>
+                                        <button type="button" class="toggle-password">👁️</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-options">
+                                    <label class="checkbox-wrapper">
+                                        <input type="checkbox" id="remember1">
+                                        <span class="checkmark"></span>
+                                        ログイン状態を保持
+                                    </label>
+                                    <a href="#" class="forgot-password">パスワードを忘れた方</a>
+                                </div>
+                                
+                                <button type="submit" class="login-btn">
+                                    <span class="btn-text">ログイン</span>
+                                    <span class="btn-loading">
+                                        <div class="loading-spinner"></div>
+                                    </span>
+                                </button>
+                                
+                                <div class="divider">
+                                    <span>または</span>
+                                </div>
+                                
+                                <div class="social-login">
+                                    <button type="button" class="social-btn google">
+                                        <span class="social-icon">🔍</span>
+                                        Googleでログイン
+                                    </button>
+                                    <button type="button" class="social-btn github">
+                                        <span class="social-icon">😺</span>
+                                        GitHubでログイン
+                                    </button>
+                                </div>
+                                
+                                <p class="signup-link">
+                                    アカウントをお持ちでない方は <a href="#">新規登録</a>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- グラスモーフィズムデザイン -->
+                    <div class="login-container glass-theme" id="glassDemo">
+                        <div class="login-card glass-card">
+                            <div class="login-header">
+                                <div class="logo">
+                                    <div class="logo-icon glass-icon">✨</div>
+                                    <h3>GlassUI</h3>
+                                </div>
+                                <p class="welcome-text">ようこそ</p>
+                            </div>
+                            
+                            <form class="login-form">
+                                <div class="form-group">
+                                    <div class="input-wrapper glass-input">
+                                        <input type="email" placeholder="メールアドレス" required>
+                                        <span class="input-icon">📧</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="input-wrapper glass-input">
+                                        <input type="password" placeholder="パスワード" required>
+                                        <span class="input-icon">🔒</span>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="login-btn glass-btn">
+                                    ログイン
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- ミニマルデザイン -->
+                    <div class="login-container minimal-theme" id="minimalDemo">
+                        <div class="login-card minimal-card">
+                            <div class="login-header">
+                                <h3>ログイン</h3>
+                            </div>
+                            
+                            <form class="login-form">
+                                <div class="form-group">
+                                    <input type="email" placeholder="メールアドレス" class="minimal-input" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="password" placeholder="パスワード" class="minimal-input" required>
+                                </div>
+                                
+                                <button type="submit" class="login-btn minimal-btn">
+                                    ログイン
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- ダークデザイン -->
+                    <div class="login-container dark-theme" id="darkDemo">
+                        <div class="login-card dark-card">
+                            <div class="login-header">
+                                <div class="logo">
+                                    <div class="logo-icon dark-icon">🌙</div>
+                                    <h3>DarkMode</h3>
+                                </div>
+                                <p class="welcome-text">セキュアなログイン</p>
+                            </div>
+                            
+                            <form class="login-form">
+                                <div class="form-group">
+                                    <div class="input-wrapper dark-input">
+                                        <input type="email" placeholder="メールアドレス" required>
+                                        <span class="input-icon">📧</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="input-wrapper dark-input">
+                                        <input type="password" placeholder="パスワード" required>
+                                        <span class="input-icon">🔒</span>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="login-btn dark-btn">
+                                    ログイン
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- アニメーション制御パネル -->
+                <div class="animation-controls">
+                    <h3>アニメーション制御</h3>
+                    <div class="control-group">
+                        <button id="playAnimation" class="btn btn-primary">アニメーション再生</button>
+                        <button id="resetAnimation" class="btn btn-secondary">リセット</button>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="animationSpeed">速度:</label>
+                        <input type="range" id="animationSpeed" min="0.5" max="3" step="0.1" value="1">
+                        <span id="speedDisplay">1.0x</span>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="animationType">アニメーションタイプ:</label>
+                        <select id="animationType">
+                            <option value="fade">フェードイン</option>
+                            <option value="slide">スライドイン</option>
+                            <option value="bounce">バウンス</option>
+                            <option value="scale">スケール</option>
+                            <option value="rotate">回転</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UIパターン紹介 -->
+            <section class="patterns-section fade-in fade-in-delay-4">
+                <h2>UIデザインパターン</h2>
+                <div class="patterns-grid">
+                    <div class="pattern-card">
+                        <div class="pattern-preview modern-preview"></div>
+                        <h3>モダンデザイン</h3>
+                        <p>グラデーションとシャドウを活用したトレンドなデザイン</p>
+                        <ul class="pattern-features">
+                            <li>カラフルなグラデーション</li>
+                            <li>ソフトシャドウ</li>
+                            <li>アイコン統合</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pattern-card">
+                        <div class="pattern-preview glass-preview"></div>
+                        <h3>グラスモーフィズム</h3>
+                        <p>透明感のあるガラス風の美しいデザイン</p>
+                        <ul class="pattern-features">
+                            <li>ブラー効果</li>
+                            <li>半透明背景</li>
+                            <li>境界線強調</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pattern-card">
+                        <div class="pattern-preview minimal-preview"></div>
+                        <h3>ミニマル</h3>
+                        <p>シンプルで洗練された使いやすいデザイン</p>
+                        <ul class="pattern-features">
+                            <li>余白の活用</li>
+                            <li>タイポグラフィ重視</li>
+                            <li>色使いを最小限</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="pattern-card">
+                        <div class="pattern-preview dark-preview"></div>
+                        <h3>ダークモード</h3>
+                        <p>目に優しく、集中しやすいダークテーマ</p>
+                        <ul class="pattern-features">
+                            <li>暗色背景</li>
+                            <li>アクセントカラー</li>
+                            <li>コントラスト調整</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 技術仕様 -->
+            <section class="info-section fade-in fade-in-delay-5">
+                <h2>技術仕様</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>🎨 アニメーション</h3>
+                        <ul>
+                            <li>GSAP による滑らかな動き</li>
+                            <li>タイムライン制御</li>
+                            <li>イージング効果</li>
+                            <li>連鎖アニメーション</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>⚙️ インタラクション</h3>
+                        <ul>
+                            <li><strong>フォーカス:</strong> 入力フィールド強調</li>
+                            <li><strong>バリデーション:</strong> リアルタイム検証</li>
+                            <li><strong>フィードバック:</strong> 視覚的な状態表示</li>
+                            <li><strong>レスポンシブ:</strong> 全デバイス対応</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>🎯 UX 最適化</h3>
+                        <ul>
+                            <li>直感的な操作フロー</li>
+                            <li>エラー状態の明確化</li>
+                            <li>アクセシビリティ対応</li>
+                            <li>パフォーマンス最適化</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 実装コード例 */
+            <section class="code-section fade-in fade-in-delay-6">
+                <h2>実装例</h2>
+                <div class="code-container">
+                    <pre><code class="language-javascript">// GSAP を使用したログインフォームアニメーション
+class LoginAnimation {
+    constructor() {
+        this.tl = gsap.timeline({ paused: true });
+        this.setupAnimation();
+    }
+
+    setupAnimation() {
+        this.tl
+            .from('.login-card', {
+                duration: 0.8,
+                y: 50,
+                opacity: 0,
+                ease: 'power2.out'
+            })
+            .from('.logo', {
+                duration: 0.6,
+                scale: 0,
+                ease: 'back.out(1.7)'
+            }, '-=0.4')
+            .from('.form-group', {
+                duration: 0.5,
+                x: -30,
+                opacity: 0,
+                stagger: 0.1,
+                ease: 'power2.out'
+            }, '-=0.3')
+            .from('.login-btn', {
+                duration: 0.4,
+                scale: 0.8,
+                opacity: 0,
+                ease: 'power2.out'
+            });
+    }
+
+    play() {
+        this.tl.restart();
+    }
+}</code></pre>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

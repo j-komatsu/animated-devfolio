@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コードタイピングアニメーション - Animated DevFolio</title>
+    <link rel="stylesheet" href="../../shared/common.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <a href="../../index.html" class="nav-back">一覧に戻る</a>
+    
+    <div class="container">
+        <header class="header">
+            <h1 class="title fade-in">コードタイピングアニメーション</h1>
+            <p class="description fade-in fade-in-delay-1">
+                リアルタイムでJavaScriptコードがタイピングされていく様子を再現。<br>
+                プログラマーの技術力をアピールできる印象的な演出です。
+            </p>
+            
+            <div class="tech-stack fade-in fade-in-delay-2">
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">GSAP</span>
+                <span class="tech-tag">Prism.js</span>
+                <span class="tech-tag">CSS Animation</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- コードタイピング表示エリア -->
+            <div class="animation-container fade-in fade-in-delay-3">
+                <div class="code-editor">
+                    <div class="editor-header">
+                        <div class="editor-controls">
+                            <span class="control close"></span>
+                            <span class="control minimize"></span>
+                            <span class="control maximize"></span>
+                        </div>
+                        <div class="editor-title">main.js</div>
+                        <div class="editor-language">JavaScript</div>
+                    </div>
+                    
+                    <div class="editor-content">
+                        <div class="line-numbers" id="lineNumbers"></div>
+                        <div class="code-area">
+                            <pre><code class="language-javascript" id="codeDisplay"></code></pre>
+                            <span class="cursor" id="cursor">|</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- コントロールパネル -->
+                <div class="controls">
+                    <h3>アニメーションコントロール</h3>
+                    <div class="control-group">
+                        <button id="startBtn" class="btn btn-primary">開始</button>
+                        <button id="pauseBtn" class="btn btn-secondary">一時停止</button>
+                        <button id="resetBtn" class="btn btn-secondary">リセット</button>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="speedSlider">タイピング速度:</label>
+                        <input type="range" id="speedSlider" min="20" max="200" step="10" value="80">
+                        <span id="speedValue">80ms</span>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="codeSelect">コードサンプル:</label>
+                        <select id="codeSelect">
+                            <option value="react-component">React Component</option>
+                            <option value="async-function">Async Function</option>
+                            <option value="class-definition">Class Definition</option>
+                            <option value="algorithm">Algorithm</option>
+                            <option value="api-call">API Call</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="soundToggle">
+                            <input type="checkbox" id="soundToggle" checked>
+                            タイピング音効果
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 説明セクション -->
+            <section class="info-section fade-in fade-in-delay-4">
+                <h2>技術仕様</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>💻 タイピング機能</h3>
+                        <ul>
+                            <li>リアルタイム文字表示</li>
+                            <li>シンタックスハイライト</li>
+                            <li>カーソル点滅アニメーション</li>
+                            <li>行番号の動的生成</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>🎨 視覚効果</h3>
+                        <ul>
+                            <li><strong>GSAP:</strong> スムーズなアニメーション</li>
+                            <li><strong>Prism.js:</strong> コードハイライト</li>
+                            <li><strong>CSS Grid:</strong> レイアウト制御</li>
+                            <li><strong>タイピング音:</strong> Web Audio API</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>⚡ パフォーマンス</h3>
+                        <ul>
+                            <li>効率的な文字列処理</li>
+                            <li>メモリ最適化された描画</li>
+                            <li>レスポンシブデザイン</li>
+                            <li>クロスブラウザ互換性</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- コードサンプル展示 -->
+            <section class="samples-section fade-in fade-in-delay-5">
+                <h2>利用できるコードサンプル</h2>
+                <div class="samples-grid">
+                    <div class="sample-card">
+                        <h4>React Component</h4>
+                        <p>モダンなReactコンポーネントの実装例</p>
+                    </div>
+                    <div class="sample-card">
+                        <h4>Async/Await</h4>
+                        <p>非同期処理の実装パターン</p>
+                    </div>
+                    <div class="sample-card">
+                        <h4>Class Definition</h4>
+                        <p>ES6クラスの定義と使用方法</p>
+                    </div>
+                    <div class="sample-card">
+                        <h4>Algorithm</h4>
+                        <p>ソートアルゴリズムの実装</p>
+                    </div>
+                    <div class="sample-card">
+                        <h4>API Integration</h4>
+                        <p>RESTful APIとの連携処理</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 実装コード例 -->
+            <section class="code-section fade-in fade-in-delay-6">
+                <h2>実装例</h2>
+                <div class="code-container">
+                    <pre><code class="language-javascript">// タイピングアニメーションの核となる関数
+class TypeWriter {
+    constructor(element, options = {}) {
+        this.element = element;
+        this.speed = options.speed || 80;
+        this.cursor = options.cursor || '|';
+        this.isTyping = false;
+    }
+    
+    async typeText(text) {
+        this.isTyping = true;
+        this.element.textContent = '';
+        
+        for (let i = 0; i < text.length; i++) {
+            if (!this.isTyping) break;
+            
+            this.element.textContent += text[i];
+            await this.delay(this.speed);
+            
+            // シンタックスハイライトを適用
+            Prism.highlightElement(this.element);
+        }
+        
+        this.isTyping = false;
+    }
+    
+    delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+}</code></pre>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

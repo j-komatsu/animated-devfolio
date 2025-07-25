@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated DevFolio - ITエンジニア向けアニメーションポートフォリオ</title>
+    <link rel="stylesheet" href="shared/common.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .animations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .animation-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .animation-card:hover::before {
+            left: 100%;
+        }
+
+        .animation-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .card-description {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .card-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .view-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .view-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.7;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4ecdc4;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .animations-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Animated DevFolio</h1>
+            <p class="subtitle">ITエンジニア向けの技術力アピール用アニメーションコレクション</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="animationCount">5</div>
+                    <div>アニメーション</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3D</div>
+                    <div>技術力</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div>Web標準</div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="animations-grid">
+                <div class="animation-card">
+                    <span class="card-icon">🎯</span>
+                    <h3 class="card-title">3D ロゴ回転</h3>
+                    <p class="card-description">
+                        Three.jsを使用した3Dロゴアニメーション。企業ロゴが美しく回転しながら浮かび上がる印象的な演出です。
+                    </p>
+                    <div class="card-tech">
+                        <span class="tech-tag">Three.js</span>
+                        <span class="tech-tag">WebGL</span>
+                        <span class="tech-tag">3D Animation</span>
+                    </div>
+                    <a href="animations/animation1/" class="view-button">デモを見る</a>
+                </div>
+
+                <div class="animation-card">
+                    <span class="card-icon">💻</span>
+                    <h3 class="card-title">コードタイピング</h3>
+                    <p class="card-description">
+                        リアルタイムでJavaScriptコードがタイピングされていく様子を再現。プログラマーの技術力をアピールできます。
+                    </p>
+                    <div class="card-tech">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">GSAP</span>
+                        <span class="tech-tag">Typing Effect</span>
+                    </div>
+                    <a href="animations/animation2/" class="view-button">デモを見る</a>
+                </div>
+
+                <div class="animation-card">
+                    <span class="card-icon">📊</span>
+                    <h3 class="card-title">売上チャート成長</h3>
+                    <p class="card-description">
+                        Chart.jsとGSAPを使用した売上データの動的可視化。データがアニメーションで成長していく様子を表現します。
+                    </p>
+                    <div class="card-tech">
+                        <span class="tech-tag">Chart.js</span>
+                        <span class="tech-tag">GSAP</span>
+                        <span class="tech-tag">Data Viz</span>
+                    </div>
+                    <a href="animations/animation3/" class="view-button">デモを見る</a>
+                </div>
+
+                <div class="animation-card">
+                    <span class="card-icon">🌍</span>
+                    <h3 class="card-title">インタラクティブ地球儀</h3>
+                    <p class="card-description">
+                        Three.jsを使用したインタラクティブな3D地球儀。グローバルなビジネス展開や地理的データの可視化に最適です。
+                    </p>
+                    <div class="card-tech">
+                        <span class="tech-tag">Three.js</span>
+                        <span class="tech-tag">WebGL</span>
+                        <span class="tech-tag">Interactive</span>
+                    </div>
+                    <a href="animations/animation4/" class="view-button">デモを見る</a>
+                </div>
+
+                <div class="animation-card">
+                    <span class="card-icon">🔐</span>
+                    <h3 class="card-title">ログイン画面UI</h3>
+                    <p class="card-description">
+                        GSAPを使用したモダンなログインUIアニメーション。4つのデザインパターンから選択できる美しい演出です。
+                    </p>
+                    <div class="card-tech">
+                        <span class="tech-tag">GSAP</span>
+                        <span class="tech-tag">UI/UX</span>
+                        <span class="tech-tag">Form Design</span>
+                    </div>
+                    <a href="animations/animation5/" class="view-button">デモを見る</a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Animated DevFolio - 技術力アピール用アニメーションコレクション</p>
+            <p>HTML5 | CSS3 | JavaScript | Three.js | GSAP</p>
+        </footer>
+    </div>
+
+    <script>
+        // カウンターアニメーション
+        function animateCounter(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // ページ読み込み時のアニメーション
+        window.addEventListener('load', () => {
+            const animationCount = document.getElementById('animationCount');
+            animateCounter(animationCount, 0, 5, 2000);
+
+            // カードの順次表示アニメーション
+            const cards = document.querySelectorAll('.animation-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        // パーティクルエフェクト（背景）
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.width = Math.random() * 4 + 2 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.background = 'rgba(255, 255, 255, 0.3)';
+            particle.style.borderRadius = '50%';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = window.innerHeight + 'px';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '-1';
+            
+            document.body.appendChild(particle);
+            
+            const animation = particle.animate([
+                { transform: 'translateY(0px)', opacity: 0 },
+                { transform: 'translateY(-' + (window.innerHeight + 100) + 'px)', opacity: 1 },
+                { transform: 'translateY(-' + (window.innerHeight + 200) + 'px)', opacity: 0 }
+            ], {
+                duration: Math.random() * 3000 + 2000,
+                easing: 'linear'
+            });
+            
+            animation.onfinish = () => particle.remove();
+        }
+
+        // パーティクルを定期的に生成
+        setInterval(createParticle, 300);
+    </script>
+</body>
+</html>

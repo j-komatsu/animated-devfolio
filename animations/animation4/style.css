@@ -1,0 +1,732 @@
+/* Animation 4: Interactive 3D Globe Styles */
+
+body {
+    background: radial-gradient(ellipse at center, #0c1445 0%, #000000 70%);
+    min-height: 100vh;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* 星空背景 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(2px 2px at 160px 30px, #ddd, transparent);
+    background-repeat: repeat;
+    background-size: 200px 150px;
+    animation: starTwinkle 20s linear infinite;
+    z-index: -1;
+    opacity: 0.7;
+}
+
+@keyframes starTwinkle {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-100px); }
+}
+
+.header {
+    text-align: center;
+    padding: 2rem 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #00d4ff, #0095ff, #6366f1, #8b5cf6);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: globeGradient 5s ease-in-out infinite;
+    text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+}
+
+@keyframes globeGradient {
+    0%, 100% { background-position: 0% 50%; }
+    25% { background-position: 100% 0%; }
+    50% { background-position: 100% 100%; }
+    75% { background-position: 0% 100%; }
+}
+
+.description {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.tech-stack {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 3rem;
+}
+
+.tech-tag {
+    background: rgba(0, 212, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    color: #00d4ff;
+}
+
+.tech-tag:hover {
+    background: rgba(0, 212, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+}
+
+.main-content {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.animation-container {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.globe-container {
+    position: relative;
+    background: radial-gradient(ellipse closest-side, rgba(0, 212, 255, 0.1) 0%, transparent 100%);
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    min-height: 600px;
+    overflow: hidden;
+}
+
+#globe-canvas {
+    width: 100%;
+    height: 600px;
+    border-radius: 15px;
+    display: block;
+    cursor: grab;
+}
+
+#globe-canvas:active {
+    cursor: grabbing;
+}
+
+.info-panel {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(15px);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    max-width: 300px;
+    transition: all 0.3s ease;
+}
+
+.info-panel h3 {
+    color: #00d4ff;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.info-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-item .label {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.info-item .value {
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.location-markers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.marker {
+    position: absolute;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.marker-dot {
+    width: 12px;
+    height: 12px;
+    background: #00d4ff;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
+    animation: markerPulse 2s ease-in-out infinite;
+    position: relative;
+}
+
+.marker-dot::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 2px solid rgba(0, 212, 255, 0.3);
+    border-radius: 50%;
+    animation: markerRipple 2s ease-out infinite;
+}
+
+@keyframes markerPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+@keyframes markerRipple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.marker-label {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.marker:hover .marker-label {
+    opacity: 1;
+}
+
+.controls {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 2rem;
+}
+
+.controls h3 {
+    margin-bottom: 1rem;
+    color: #00d4ff;
+    font-size: 1.2rem;
+}
+
+.control-group {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.control-group label {
+    font-weight: 600;
+    min-width: 80px;
+    color: #fff;
+}
+
+.control-group input[type="range"] {
+    flex: 1;
+    min-width: 120px;
+    accent-color: #00d4ff;
+}
+
+.control-group select {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 0.5rem;
+    color: white;
+    font-size: 0.9rem;
+    min-width: 120px;
+}
+
+.control-group select option {
+    background: #0c1445;
+    color: white;
+}
+
+.control-group input[type="checkbox"] {
+    accent-color: #00d4ff;
+    margin-right: 0.5rem;
+}
+
+#speedDisplay {
+    font-weight: bold;
+    color: #00d4ff;
+    min-width: 30px;
+}
+
+.city-panel {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.city-panel h3 {
+    margin-bottom: 1rem;
+    color: #00d4ff;
+    font-size: 1.2rem;
+}
+
+.city-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.city-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.city-card:hover {
+    background: rgba(0, 212, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 212, 255, 0.2);
+}
+
+.city-flag {
+    font-size: 2rem;
+}
+
+.city-info {
+    flex: 1;
+}
+
+.city-name {
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+    color: #fff;
+}
+
+.city-coords {
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.stats-section {
+    margin-bottom: 3rem;
+}
+
+.stats-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 212, 255, 0.1);
+    border-color: rgba(0, 212, 255, 0.3);
+}
+
+.stat-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #00d4ff;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 1rem;
+    opacity: 0.8;
+    color: #fff;
+}
+
+.info-section {
+    margin-bottom: 3rem;
+}
+
+.info-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    border-color: rgba(0, 212, 255, 0.5);
+}
+
+.info-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #00d4ff;
+}
+
+.info-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.info-card li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.info-card li:last-child {
+    border-bottom: none;
+}
+
+.info-card li::before {
+    content: "🌐";
+    position: absolute;
+    left: 0;
+    font-size: 0.9rem;
+}
+
+.code-section {
+    margin-bottom: 3rem;
+}
+
+.code-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.code-container {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow-x: auto;
+}
+
+.code-container pre {
+    margin: 0;
+    color: #e6e6e6;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* ボタンスタイル */
+.btn {
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #00d4ff, #0095ff);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* 地球儀の光効果 */
+.globe-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: globeGlow 4s ease-in-out infinite;
+}
+
+@keyframes globeGlow {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+    50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+    
+    .description {
+        font-size: 1rem;
+    }
+    
+    .globe-container {
+        min-height: 400px;
+    }
+    
+    #globe-canvas {
+        height: 400px;
+    }
+    
+    .info-panel {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin-bottom: 1rem;
+        max-width: none;
+    }
+    
+    .city-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .stat-item {
+        padding: 1.5rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .control-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .control-group input[type="range"],
+    .control-group select {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .animation-container {
+        padding: 1rem;
+    }
+    
+    .globe-container {
+        min-height: 300px;
+    }
+    
+    #globe-canvas {
+        height: 300px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .city-card {
+        padding: 0.8rem;
+    }
+    
+    .city-flag {
+        font-size: 1.5rem;
+    }
+    
+    .controls {
+        padding: 1rem;
+    }
+}
+
+/* アニメーション */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-delay-1 { animation-delay: 0.2s; }
+.fade-in-delay-2 { animation-delay: 0.4s; }
+.fade-in-delay-3 { animation-delay: 0.6s; }
+.fade-in-delay-4 { animation-delay: 0.8s; }
+.fade-in-delay-5 { animation-delay: 1.0s; }
+.fade-in-delay-6 { animation-delay: 1.2s; }
+
+/* ローディングアニメーション */
+.loading-globe {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 600px;
+    font-size: 1.2rem;
+    color: #00d4ff;
+}
+
+.loading-globe::before {
+    content: '🌍';
+    font-size: 3rem;
+    margin-right: 1rem;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* パフォーマンス最適化 */
+.globe-container {
+    will-change: transform;
+}
+
+.marker {
+    will-change: transform;
+}
+
+/* アクセシビリティ */
+@media (prefers-reduced-motion: reduce) {
+    .title {
+        animation: none;
+    }
+    
+    .fade-in {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+    
+    .marker-dot {
+        animation: none;
+    }
+    
+    .marker-dot::after {
+        animation: none;
+    }
+    
+    .globe-glow {
+        animation: none;
+    }
+    
+    body::before {
+        animation: none;
+    }
+}
+
+/* 高コントラストモード */
+@media (prefers-contrast: high) {
+    .info-panel,
+    .controls,
+    .city-panel {
+        background: rgba(0, 0, 0, 0.9);
+        border: 2px solid #00d4ff;
+    }
+    
+    .city-card {
+        border: 1px solid #00d4ff;
+    }
+}
